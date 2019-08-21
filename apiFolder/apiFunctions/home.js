@@ -3,12 +3,6 @@ const auth = FbApp.auth();
 
 let homeNec = true;
 
-// auth.onAuthStateChanged(user => {
-//   if (!user) {
-//     homeNec = false;
-//   } 
-// })
-
 
 function home(req, res){
    auth.onAuthStateChanged((user)=>{
@@ -19,17 +13,17 @@ function home(req, res){
     let html = `
     <div class="login-page">
     <div class="form">
-      <form class="register-form">
-        <input type="text" placeholder="name"/>
-        <input type="password" placeholder="password"/>
-        <input type="text" placeholder="email address"/>
-        <button>create</button>
-        <p class="message">¿Ya te registraste? <a href="#">Entra a tu cuenta</a></p>
+      <form id="signin-form" class="register-form">
+        <input id="name" name="name" type="text" placeholder="Nombre"/>
+        <input id="password" name="password" type="password" placeholder="Contraseña"/>
+        <input id="email" name="email" type="text" placeholder="Correo electrónico"/>
+        <input type="submit" value="Crear cuenta">
+        <p class="message">¿Ya te registraste? <a href="#">Inicia sesión</a></p>
       </form>
-      <form class="login-form">
-        <input type="text" placeholder="username"/>
-        <input type="password" placeholder="password"/>
-        <button>login</button>
+      <form id="login-form" class="login-form">
+        <input id="name" name="name" type="text" placeholder="username"/>
+        <input id="password" name="password" type="password" placeholder="password"/>
+        <input type="submit" value="Iniciar sesión">
         <p class="message">¿No te has registrado? <a href="#">Crea tu cuenta</a></p>
       </form>
     </div>
