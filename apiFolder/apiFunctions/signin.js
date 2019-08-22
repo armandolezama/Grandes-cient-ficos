@@ -12,56 +12,53 @@ function signin(req, resp){
   body = {html, errorCreate, errorAuth}
 
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
-        console.log(cred)
         var dbUser = db.collection('users')
         dbUser.doc(cred.user.uid).set({    
           email: email,
           name: name
           });
-        sginupTags.signupForm.reset();
-        // Cerrar modal
       }).catch((err) => {
+        console.log(err)
         body.errorCreate = err;
       });
 
-      auth.onAuthStateChanged((user)=>{
+    auth.onAuthStateChanged((user)=>{
+        console.log('auth activada')
         if(user){
-          db.collection('scientists').get().then(function(querySnapshot){
-              querySnapshot.forEach((doc) => {
+          console.log('auth aceptada')
+          db.collection('scientists').get().then(snapshot =>{
+              snapshot.forEach(doc => {
                 let opinions = '';
-                doc.ranking.forEach((rank) => {
-                  opinions += `
-                  <div class="rankin">
-                  <h4 id="${rank.uid}" class="user-name" >${rank.name}</h4>
-                  <p class="ranking" >${rank.ranking}</p>
-                  </div>
-                  `
-                })
+                for(rank of doc.data().rankings){
+
+                    opinions += `
+                    <div class="rankin">
+                    <h4 id="${rank.id}" class="user-name" >${rank.name}</h4>
+                    <p class="ranking" >${rank.ranking}</p>
+                    <p>${rank.Opinion}</p>
+                    </div>
+                    `
+                  }
+
                 body.html += `
                 <article id=" /* id form scientist document* / " class="scientist-card" >
-                <h3 class="scientist-name">${doc.name} </h3>
-                <p class="contribution">${doc.contributions} </p>
+                <h3 class="scientist-name">${doc.data().name} </h3>
+                <p class="contribution">${doc.data().contributions} </p>
                 ${opinions}
                 </article>
                 ` 
                   // doc.data() is never undefined for query doc snapshots
                   // console.log(doc.id, " => ", doc.data());
               });
-          })
-          .catch((error) => {
-              body.errorAuth = error;
-          });
-
-          body.html += `
-          <section id="public-container" class="public-container">
-          ${body.html}
-          </section>
-          `;
-          
+              body.html = `
+              <section id="public-container" class="public-container">
+              ${body.html}
+              </section>
+              `;
+              resp.send(body)
+          }).catch(err => console.log(err))
         } 
       })
-
-  resp.send(body)
 }
 
 module.exports = signin;
