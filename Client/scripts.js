@@ -40,11 +40,36 @@ function start(){
                     fetch(`${url}/signin`, config).then(
                         response => response.json()).then(
                             (responseJson)=>{
-                            console.log(responseJson.html)
-                        mainSection.innerHTML = responseJson.html;
-                    }).catch(err=> console.log(err));
-                
+                            mainSection.innerHTML = responseJson.html;
+                    }).catch(err=> console.log(err));               
                 });
+
+                
+                loginForm.addEventListener('submit', (event)=> {
+                    event.preventDefault();
+
+                    const email = loginForm.email.value;
+                    const password = loginForm.password.value;
+
+                    const config = {
+                        method: 'post',
+                        body: JSON.stringify(
+                            { 
+                                email: email,
+                                password: password
+                            }
+                        ),
+                        headers:{
+                            'Content-Type': 'application/json'
+                        }
+                    }
+
+                    fetch(`${url}/login`, config).then(
+                        response => response.json()).then(
+                            (responseJson)=>{
+                            mainSection.innerHTML = responseJson.html;
+                    }).catch(err=> console.log(err));
+                })
 
             }
         }
@@ -54,18 +79,3 @@ function start(){
 /*Función que se dividirá entre el addeventlistener (front) y el auth (back) */
 
 
-// loginForm.addEventListener('submit', (event)=> {
-//     event.preventDefault();
-
-//     const email = loginForm.email.value;
-//     const password = loginForm.password.value;
-
-//     auth.signInWithEmailAndPassword(email, password).then((cred) => {
-//         // close the signup modal & reset form
-//       }).catch(err => {
-//         alert('El usuario y contraseña son incorrectos o no existen');
-//         restartModal();
-//         console.log('err')
-//       });
-
-// });

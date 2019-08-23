@@ -23,14 +23,17 @@ function signin(req, resp){
       });
 
     auth.onAuthStateChanged((user)=>{
-        console.log('auth activada')
         if(user){
+          auth.currentUser.updateProfile({
+            displayName: name
+          }).catch(function(error) {
+            console.log(error)
+          });
           console.log('auth aceptada')
           db.collection('scientists').get().then(snapshot =>{
               snapshot.forEach(doc => {
                 let opinions = '';
                 for(rank of doc.data().rankings){
-
                     opinions += `
                     <div class="rankin">
                     <h4 id="${rank.id}" class="user-name" >${rank.name}</h4>
@@ -40,8 +43,16 @@ function signin(req, resp){
                     `
                   }
 
+                opinions = `
+                <div class="rank-section" >
+                ${opinions}
+                </div>
+                <input class="new-opinion" type="text">
+                <button id="send-opinion" class="send-opinion">Enviar opinion</button>
+                `
+
                 body.html += `
-                <article id=" /* id form scientist document* / " class="scientist-card" >
+                <article id="${doc.id}" class="scientist-card" >
                 <h3 class="scientist-name">${doc.data().name} </h3>
                 <p class="contribution">${doc.data().contributions} </p>
                 ${opinions}
@@ -51,6 +62,9 @@ function signin(req, resp){
                   // console.log(doc.id, " => ", doc.data());
               });
               body.html = `
+              <article class="user-data" >
+              <h2>${user.displayName}</h2>
+              </article>
               <section id="public-container" class="public-container">
               ${body.html}
               </section>
