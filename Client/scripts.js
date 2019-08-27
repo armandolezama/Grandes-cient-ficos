@@ -3,6 +3,7 @@ let signinForm;
 let loginForm;
 let formSection;
 
+
 let url = 'http://localhost:8000/grandes-cientificos';
 
 
@@ -71,6 +72,8 @@ function start(){
                     }).catch(err=> console.log(err));
                 })
 
+            } else {
+                mainSection.innerHTML = response.html
             }
         }
     ).catch(err => console.log(err));

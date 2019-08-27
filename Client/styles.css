@@ -102,15 +102,20 @@ body {
 }
 
 .scientist-card{
-  display: inline-flex;
-  width: 300px;
-  height: 400px;
-  flex-flow: column;
+	background-color: #4d4d4d;
+    display: inline-flex;
+    width: 300px;
+    height: 400px;
+    flex-flow: column;
+    border: solid;
 }
 
 .rank-section{
-  overflow: scroll;
-  height: 200px;
+	overflow: scroll;
+    height: 200px;
+    background-color: #04B9CD;
+    border-top: solid;
+
 }
 
 .new-opinion{
@@ -120,19 +125,38 @@ body {
 }
 
 .send-opinion{
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  height: 30px;
-  text-transform: uppercase;
-  outline: 0;
-  background: #F8D942;
-  width: 100%;
-  border: 0;
-  color: #7E7E7A;
-  font-size: 14px;
-  cursor: pointer;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    height: 30px;
+    text-transform: uppercase;
+    outline: 0;
+    background: #034FDC;
+    width: 100%;
+    border: 0;
+    color: #E2EAFA;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 .user-data{
-  width: 100%,
-  
+  width: 100%;
+  height: 80px;
+}
+
+.scientist-name{
+    background-color: #B9EEF9;
+    text-align: center;
+    padding: 12px;
+    margin: inherit;
+    font-size: 20px;
+    font-family: monospace;
+}
+
+.contribution{
+	border-top: solid;
+	background-color: #87D1D9;
+    text-align: center;
+    padding: 12px;
+    margin: inherit;
+    font-size: 17px;
+    font-family: cursive;
 }
