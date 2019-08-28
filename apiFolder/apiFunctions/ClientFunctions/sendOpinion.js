@@ -10,16 +10,21 @@ function sendOpinion(req, res){
 
     auth.onAuthStateChanged((user)=>{
         if(user){
-             
-            db.collection('scientists').doc(idSc).update({
-                rankings: admin.firestore.FieldValue.arrayUnion({
+            let rankings = [];
+            db.collection('scientists').doc(idSc).get().then(doc =>{
+                let newOpinion = {
                     Opinion: opinionSc,
                     email: user.email,
                     id: user.uid,
                     name: user.displayName,
                     ranking: rankingSc
-                })
-            }).catch(err => console.log(err))
+                };
+                console.log(doc.data().rankings)
+                rankings = doc.data().rankings;
+                rankings.push(newOpinion)
+                db.collection('scientists').doc(idSc).set({rankings}, {merge: true}).catch(err => console.log(err))
+            })
+            
         }
         //Else if user.admin añadir html para admin 
       })
