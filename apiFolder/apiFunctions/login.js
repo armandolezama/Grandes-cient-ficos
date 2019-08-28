@@ -1,6 +1,6 @@
-const FbApp = require('./Firebase')
+const FbApp = require('./Firebase');
 const auth = FbApp.auth();
-const processingData = require('./processingData')
+const processingData = require('./ClientFunctions/processingData')
 const db = FbApp.firestore();
 
 function login(req, resp){ 

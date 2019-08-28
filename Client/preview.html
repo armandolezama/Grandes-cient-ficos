@@ -6,36 +6,49 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>(Preview)Grandes científicos</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body onload="start()">
+<body>
     <section class="content-window">
             <article class="user-data">
-                <h2 class="user-loged">José Brandon Camacho Arias</h2>
+            <h2 class="user-loged">Nombre de usuario: José Brandon Camacho Arias</h2>
+            <p>Correo electrónico: antim3r@gmail.com</p>
             </article>
             <section id="public-container" class="public-container">
             
               <article id="m1VOcDbHZ54ULxXbWUOR" class="scientist-card">
-                <h3 class="scientist-name">Albert Einstein </h3>
-                <p class="contribution">Relativity Theory, Photoelectric effect </p>
-                
-                <div class="rank-section">
-                
-                    <div class="rankin">
-                    <h4 id="q2UtcbY79jYugVuzS4Av" class="user-name">user</h4>
-                    <p class="ranking">4.5</p>
-                    <p>He was a genius</p>
-                    </div>
-                    
-                    <div class="rankin">
-                    <h4 id="pendant" class="user-name">user1</h4>
-                    <p class="ranking">2.5</p>
-                    <p>"Poincaré was better"</p>
-                    </div>
-                    
-                </div>
-                <input class="new-opinion" type="text">
-                <button id="send-opinion" class="send-opinion">Enviar opinion</button>
-            </article>          
-        </section>
+              <h3 class="scientist-name">Albert Einstein</h3>
+              <p class="contribution">Relativity Theory, Photoelectric effect </p>
+              
+              <div class="rank-section">
+              
+                  <div class="rankin">
+                  <h4 id="q2UtcbY79jYugVuzS4Av" class="user-name">user</h4>
+                  <p class="ranking">4.5</p>
+                  <p>He was a genius</p>
+                  </div>
+                  
+                  <div class="rankin">
+                  <h4 id="pendant" class="user-name">user1</h4>
+                  <p class="ranking">2.5</p>
+                  <p>"Poincaré was better"</p>
+                  </div>
+                  
+              </div>
+              <input id="input-of-${doc.id}" class="new-opinion" type="text">
+              <div class="rank-score">
+                <h4>Puntaje: </h4> <p id="score-of-${doc.id}">5</p>
+                <button id="score-plus-of-${doc.id}" class="score-plus">+</button>
+                <button id="score-less-of-${doc.id}" class="score-les">-</button>
+              </div>
+              <button id="send-opinion" class="send-opinion">Enviar opinion</button>
+              
+              </article>
+              
+            </section>
+
+            
     </section>
- 
+    <script src="scripts.js" ></script>
+</body>
+</html>
