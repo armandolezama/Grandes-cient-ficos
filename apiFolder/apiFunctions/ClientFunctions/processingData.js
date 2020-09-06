@@ -15,7 +15,7 @@ module.exports = function processingData(user, snapshot) {
           }
 
         opinions = `
-        <div class="rank-section" >
+        <div id="rank-section-of-${doc.id}" class="rank-section" >
         ${opinions}
         </div>
         <input id="input-of-${doc.id}" class="new-opinion" type="text">
@@ -28,9 +28,9 @@ module.exports = function processingData(user, snapshot) {
         `
       } else {
         opinions = `
-        <div class="rank-section" >
+        <div id="rank-section-of-${doc.id}" class="rank-section" >
         </div>
-        <input id="${doc.id}" class="new-opinion" type="text" required>
+        <input id="input-of-${doc.id}" class="new-opinion" type="text" required>
         <button name="${doc.id}" class="send-opinion">Enviar opinion</button>
         `
       }
@@ -49,6 +49,7 @@ module.exports = function processingData(user, snapshot) {
     <article class="user-data" >
     <h2 class="user-loged">Nombre de usuario: ${user.displayName}</h2>
     <p>Correo electrónico: ${user.email}</p>
+    <button class="end-session" onclick="logout()" >Salir</button>
     </article>
     <section id="public-container" class="public-container">
     ${html}

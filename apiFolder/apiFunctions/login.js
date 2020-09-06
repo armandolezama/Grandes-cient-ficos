@@ -17,11 +17,13 @@ function login(req, resp){
 
     auth.onAuthStateChanged((user)=>{
         if(user){
-          console.log('auth aceptada')
           db.collection('scientists').get().then(snapshot =>{
           body.html = processingData(user, snapshot);
           resp.send(body);
-        }).catch(err => {console.log(err)})
+        }).catch(err => {
+          console.log(err)
+          resp.send(err)
+          })
         } 
 
         //Else if user.admin añadir html para admin 

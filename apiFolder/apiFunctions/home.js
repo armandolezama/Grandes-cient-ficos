@@ -1,15 +1,9 @@
 const FbApp = require('./Firebase')
 const auth = FbApp.auth();
 
-let homeNec = true;
-
 
 function home(req, res){
-   auth.onAuthStateChanged((user)=>{
-     if(user){
-       homeNec = false;
-     }
-   })
+
     let html = `
     <div class="login-page">
     <div class="form">
@@ -30,9 +24,8 @@ function home(req, res){
     </div>`
     
     body = {
-        html:html,
-        homeNec : homeNec
-    }
+        html:html
+    } // 
     res.send(body);
 }
 

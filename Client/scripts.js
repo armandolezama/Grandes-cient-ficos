@@ -38,6 +38,7 @@ function getingData(direction, body){
                 operationElements[`lessScoreOf${id}`] = document.getElementById(`score-less-of-${id}`);
                 operationElements[`inputOf${id}`] = document.getElementById(`input-of-${id}`);
                 operationElements[`scoreOf${id}`] = document.getElementById(`score-of-${id}`);
+                operationElements[`rankSectionOf${id}`] = document.getElementById(`rank-section-of-${id}`);
 
                 operationElements[`plusScoreOf${id}`].addEventListener('click', ()=> {
                     if(operationElements[`scoreOf${id}`].innerHTML < 5){
@@ -67,10 +68,9 @@ function getingData(direction, body){
                             'Content-Type': 'application/json'
                           }
                     }
-                    fetch(`${url}/client/send-opinion`, configSend).then(response =>{
-                        return response.json();
-                    }).then(response => {
-                        console.log(response)
+                    fetch(`${url}/client/send-opinion`, configSend).then(
+                        response => response.json()).then(response => {
+                            operationElements[`rankSectionOf${id}`].innerHTML += response.html;
                     }).catch(err => {console.log(err)})
                 })
             }
@@ -81,7 +81,6 @@ function start(){
     
     fetch(`${url}/home`).then(
         response => response.json()).then((response) => {
-            if(response.homeNec){
                 mainSection.innerHTML = response.html
                 signinForm = document.getElementById('signin-form');
                 loginForm = document.getElementById('login-form');
@@ -106,14 +105,23 @@ function start(){
                         password: loginForm.password.value};
                     getingData('login', body);
                 })
-            } else {
-                mainSection.innerHTML = response.html
-            }
         }
     ).catch(err => console.log(err));
 }
 
-
+function logout(){
+    fetch(`${url}/logout`, {
+        method: 'post',
+        body: JSON.stringify({logout: true}),
+        headers:{
+            'Content-Type': 'application/json'
+          }
+    }).then(response => response.json()).then(
+        response => {
+            console.log(response)}
+        );
+        start()
+}
 
 
 

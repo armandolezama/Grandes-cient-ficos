@@ -30,7 +30,6 @@ function signin(req, resp){
           }).catch(function(error) {
             console.log(error)
           });
-          console.log('auth aceptada')
           db.collection('scientists').get().then(snapshot =>{
             body.html = processingData(user, snapshot);
             resp.send(body);
